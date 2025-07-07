@@ -11,3 +11,5 @@ The Mod Menu has:
 4) Game's in-built debug menu
 
 Gameplay: https://youtu.be/o7lNKvr6Mq4
+
+Mod: https://www.nexusmods.com/rajianancientepic/mods/2
