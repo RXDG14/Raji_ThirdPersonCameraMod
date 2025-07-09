@@ -155,6 +155,26 @@ void DestroyModMenu()
     }
 }
 
+void ShowModMenu()
+{
+    if(MyPlayerControllerCached->DebugMenuWidget)
+    {
+        MyPlayerControllerCached->DebugMenuWidget->SetVisibility(SDK::ESlateVisibility::Visible);
+    }
+    else
+    {
+        CreateModMenu();
+    }
+}
+
+void HideModMenu()
+{
+    if (MyPlayerControllerCached->DebugMenuWidget)
+    {
+        MyPlayerControllerCached->DebugMenuWidget->SetVisibility(SDK::ESlateVisibility::Hidden);
+    }
+}
+
 void ModMenuMain()
 {
     SDK::UWorld* World = SDK::UWorld::GetWorld();
@@ -177,21 +197,22 @@ void ModMenuMain()
 
     ///////////////////////////////////////////////////////////
     
+    // If DebugMenu destroyed due to level change, reset flag
+    if (bModMenuCreated && MyPlayerControllerCached->DebugMenuWidget == nullptr)
+    {
+        bModMenuCreated = false;
+    }
+
     if (bModMenuEnabled)
     {
-        // when you use debug menu to change levels, need to reset flag
-        if (bModMenuCreated && MyPlayerControllerCached->DebugMenuWidget == nullptr)
-        {
-            bModMenuCreated = false;
-        }
-
         if (!bModMenuCreated)
         {
             CreateModMenu();
         }
+        ShowModMenu();
     }
     else
     {
-        DestroyModMenu();
+        HideModMenu();
     }
 }
